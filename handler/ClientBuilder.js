@@ -1,6 +1,7 @@
 const { Collection, Client, MessageActionRow, MessageButton } = require("discord.js"),
     Discord = require("discord.js"),
     fs = require("fs");
+var { getLastCommit } = require('git-last-commit');
 let jsoning = require("jsoning");
 module.exports = class system extends Client {
     constructor(options) {
@@ -15,6 +16,22 @@ module.exports = class system extends Client {
         this.config = require('../config/configs.json');
         this.recent = new Set();
         this.db = new jsoning("database/global.json");
+    }
+    commitshorthash() {
+        return new Promise((res, rej) => {
+            getLastCommit((err, commit) => {
+                if (err) return rej(err);
+                return res(commit.shortHash)
+            })
+        })
+    }
+    commitsubject() {
+        return new Promise((res, rej) => {
+            getLastCommit((err, commit) => {
+                if (err) return rej(err);
+                return res(commit.subject)
+            })
+        })
     }
     reload() {
         fs.readdir("./commands/", (err, categories) => {

@@ -3,6 +3,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const Discord = require('discord.js');
 
 exports.run = async(client, message, args) => {
+    const last = await client.commitshorthash()
+    const lastd = await client.commitsubject()
     const mss = await message.channel.send("Calculating...");
     message.channel.sendTyping()
     let m = require('moment-duration-format'),
@@ -65,6 +67,7 @@ exports.run = async(client, message, args) => {
                 .addFields({ name: '**Ping**', value: `**Latency** ${mss.createdTimestamp - message.createdTimestamp}ms\n**API** ${Math.floor(client.ws.ping)}ms`, inline: true }, { name: '**Software**', value: `**Discord.js** ${djs}\n**Nodejs** ${Node}`, inline: true }, )
                 .addField('Server', `**Guild** ${guild}\n**User** ${user}\n **Channel** ${channel}`, true)
                 .addField('System', `**CPU** ${cores} - ${cpuModel}\n**Used** ${CPU}%\n**RAM Usage** ${usage}\n**RAM** ${free} - ${total}`, true)
+                .addField("\n**Last commit**\n", "`" + last + "` " + lastd)
                 .setTimestamp()
                 .setFooter("Powered By DRM", message.author.displayAvatarURL());
             author = message.author.id
