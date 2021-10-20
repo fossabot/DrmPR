@@ -2,6 +2,7 @@ const Discord = require("discord.js"),
     cooldowns = new Discord.Collection();
 let jsoning = require("jsoning");
 let db = new jsoning("database/global.json");
+let dbb = new jsoning("database/blacklist.json");
 module.exports = async(client, message) => {
     if (message.author.bot || message.author === client.user) return;
     let globalprefix = await db.get("prefix")
@@ -15,14 +16,13 @@ module.exports = async(client, message) => {
     let cmd = args.shift().toLowerCase();
     let sender = message.author;
     let authorid = message.author.id
-    let black = require("../database/global.json")
-    let blacklist = black.blacklist
+    let blacklist = await dbb.get("blacklist")
 
     if (blacklist.includes(message.author.id)) {
         const blacklist = new Discord.MessageEmbed()
             .setFooter("DotBot")
             .setColor("YELLOW")
-            .setDescription("ou in blacklist bot if there is a problem contact me <@754192220843802664>!\n```js\nID Blacklist: " + message.author.id + "```")
+            .setDescription("You in blacklist bot if there is a problem contact me <@754192220843802664>!\n```js\nID Blacklist: " + message.author.id + "```")
             .setTimestamp()
         return message.channel.send({ embeds: [blacklist] })
     }

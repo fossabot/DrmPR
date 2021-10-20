@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 let jsoning = require("jsoning");
 let db = new jsoning("database/global.json");
+let dbb = new jsoning("database/blacklist.json");
 const { MessageActionRow, MessageButton } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const wait = require('util').promisify(setTimeout);
@@ -58,7 +59,7 @@ exports.run = async(client, message, args) => {
         return message.channel.send("settings Update!")
     }
     if (args[0].toLowerCase() == "blacklist") {
-        db.push('blacklist', args.slice(1).join(" "))
+        dbb.push('blacklist', args.slice(1).join(" "))
         return message.channel.send("Adding to database!")
     }
     if (args[0].toLowerCase() == "activity") {
@@ -112,7 +113,7 @@ exports.slash = {
                 return interaction.reply("settings Update!")
             }
             if (blacklist) {
-                await db.push('blacklist', blacklist)
+                await dbb.push('blacklist', blacklist)
                 return interaction.reply("Adding to database!")
             }
             if (nac) {

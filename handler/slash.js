@@ -2,6 +2,7 @@ const config = require("../config/configs.json")
 let jsoning = require("jsoning");
 let db = new jsoning("database/global.json");
 const Discord = require("discord.js")
+let dbb = new jsoning("database/blacklist.json");
 
 module.exports = async(client, message) => {
     const prefix = await db.get("prefix")
@@ -9,7 +10,7 @@ module.exports = async(client, message) => {
         if (!interaction.isCommand()) return;
         let commandFile = client.commands.get(interaction.commandName)
         let black = require("../database/global.json")
-        let blacklist = black.blacklist
+        let blacklist = await dbb.get("blacklist")
 
         if (blacklist.includes(interaction.user.id)) {
             const blacklist = new Discord.MessageEmbed()
