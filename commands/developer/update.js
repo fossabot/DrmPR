@@ -1,6 +1,6 @@
 let { execSync } = require('child_process')
 exports.run = async(client, message, args) => {
-    let stdout = execSync('git remote set-url origin https://github.com/Nurutomo/wabot-aq.git && git pull')
+    let stdout = execSync('git remote set-url origin https://github.com/DemuraAIdev/DrmPR.git && git pull')
     client.reload()
     message.channel.send("```" + stdout.toString() + "```")
 }
