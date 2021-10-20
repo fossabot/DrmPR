@@ -1,7 +1,16 @@
 const fs = require('fs'); // fs is the built-in Node.js file system module.
-const guilds = require('../database/msend.json'); // This path may vary.
+
 const config = require("../config/configs.json")
+const path = "./database/msend.json"
 module.exports = async(client) => {
+    if (!fs.existsSync(path)) {
+        fs.appendFile('database/msend.json', '{}', function(err) {
+            if (err) throw err;
+            console.log('Saved!');
+            process.exit()
+        });
+    }
+    const guilds = require('../database/msend.json'); // This path may vary.
     client.on('message', message => {
         // If the author is NOT a bot...
         if (!message.author.bot) {
