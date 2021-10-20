@@ -19,7 +19,12 @@ module.exports = async(client, message) => {
     let blacklist = black.blacklist
 
     if (blacklist.includes(message.author.id)) {
-        return message.channel.send({ content: "You in blacklist bot if there is a problem contact me <@754192220843802664>" })
+        const blacklist = new Discord.MessageEmbed()
+            .setFooter("DotBot")
+            .setColor("YELLOW")
+            .setDescription("ou in blacklist bot if there is a problem contact me <@754192220843802664>!\n```js\nID Blacklist: " + message.author.id + "```")
+            .setTimestamp()
+        return message.channel.send({ embeds: [blacklist] })
     }
 
     if (message.attachments.size > 0) {
@@ -48,13 +53,28 @@ module.exports = async(client, message) => {
 
     if (!commandFile) return;
     if (commandFile.conf.developer === true) {
-        if (!client.config.bot.owner.includes(message.author.id)) return message.channel.send('You are not my **Developer**!');
+        const youarenot = new Discord.MessageEmbed()
+            .setFooter("DotBot")
+            .setColor("YELLOW")
+            .setDescription("You are not my **Developer**!")
+            .setTimestamp()
+        if (!client.config.bot.owner.includes(message.author.id)) return message.channel.send({ embeds: [youarenot] });
     }
     if (!message.member.permissions.has(commandFile.conf.permissions)) {
-        return message.channel.send(`Not Enough Permission!\n**Require: ${commandFile.conf.permissions} **`);
+        const Require = new Discord.MessageEmbed()
+            .setFooter("DotBot")
+            .setColor("YELLOW")
+            .setDescription(`Not Enough Permission!\n**Require: ${commandFile.conf.permissions} **`)
+            .setTimestamp()
+        return message.channel.send({ embeds: [Require] });
     }
     if (!message.guild.me.permissions.has(commandFile.conf.needperms)) {
-        return message.channel.send(`The Bot need Permission!\n**Require: ${commandFile.conf.needperms} **`);
+        const need = new Discord.MessageEmbed()
+            .setFooter("DotBot")
+            .setColor("YELLOW")
+            .setDescription(`The Bot need Permission!\n**Require: ${commandFile.conf.needperms} **`)
+            .setTimestamp()
+        return message.channel.send({ embeds: [need] });
     }
 
     if (!cooldowns.has(commandFile.help.name)) cooldowns.set(commandFile.help.name, new Discord.Collection());

@@ -12,10 +12,20 @@ module.exports = async(client, message) => {
         let blacklist = black.blacklist
 
         if (blacklist.includes(interaction.user.id)) {
-            return interaction.reply({ content: "You in blacklist bot if there is a problem contact me <@754192220843802664>" })
+            const blacklist = new Discord.MessageEmbed()
+                .setFooter("DotBot")
+                .setColor("YELLOW")
+                .setDescription("You in blacklist bot if there is a problem contact me <@754192220843802664>!\n```js\nID Blacklist: " + interaction.user.id + "```")
+                .setTimestamp()
+            return interaction.reply({ embeds: [blacklist] })
         }
         if (commandFile.conf.developer === true) {
-            if (!client.config.bot.owner.includes(interaction.user.id)) return interaction.reply('You are not my **Developer**!');
+            const youarenot = new Discord.MessageEmbed()
+                .setFooter("DotBot")
+                .setColor("YELLOW")
+                .setDescription("You are not my **Developer**!")
+                .setTimestamp()
+            if (!client.config.bot.owner.includes(interaction.user.id)) return interaction.reply({ embeds: [youarenot] });
         }
         if (!interaction.member.permissions.has(commandFile.conf.permissions)) return interaction.reply(`Not Enough Permission!\n**Require: ${commandFile.conf.permissions} **`);
         if (!commandFile) return;
