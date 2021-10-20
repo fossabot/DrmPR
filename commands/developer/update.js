@@ -53,7 +53,7 @@ exports.run = async(client, message, args) => {
 
 exports.help = {
     name: "update",
-    description: "Update file bot",
+    description: "Update file bot & reload",
     usage: "[prefix]update",
     example: "[prefix]update"
 }
