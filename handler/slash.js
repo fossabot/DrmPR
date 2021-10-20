@@ -9,8 +9,8 @@ module.exports = async(client, message) => {
     client.on('interactionCreate', async interaction => {
         if (!interaction.isCommand()) return;
         let commandFile = client.commands.get(interaction.commandName)
-        let black = require("../database/global.json")
-        let blacklist = await dbb.get("blacklist")
+        let black = require("../database/blacklist.json")
+        let blacklist = black.blacklist
 
         if (blacklist.includes(interaction.user.id)) {
             const blacklist = new Discord.MessageEmbed()
