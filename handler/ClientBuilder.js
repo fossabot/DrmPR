@@ -68,7 +68,7 @@ module.exports = class system extends Client {
 
             })
         })
-        return "Success reload()"
+        return this.client.commands
     }
 
 }
