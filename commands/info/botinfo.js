@@ -17,8 +17,16 @@ exports.run = async(client, message, args) => {
             return console.error(error)
         }
 
-        const cores = os.cpus().length
-        const cpuModel = os.cpus()[0].model
+        let cores;
+        let cpuModel;
+
+        if (os.cpus().length === 0) {
+            cores = "Mobile device"
+            cpuModel = "Mobile device"
+        } else {
+            cores = os.cpus().length
+            cpuModel = os.cpus()[0].model
+        }
         const guild = client.guilds.cache.size.toLocaleString()
         const user = client.users.cache.size.toLocaleString()
         const channel = client.channels.cache.size.toLocaleString()
