@@ -35,9 +35,9 @@ exports.run = async(client, message, args) => {
             const update = new Discord.MessageEmbed()
                 .setFooter("DotBot")
                 .setColor("GREEN")
-                .setDescription("Update complete\n```" + stdout + "```")
+                .setDescription("Update complete\n```" + stdout.toString() + "```")
                 .setTimestamp()
-            if (stdout === "Already up to date.") {
+            if (stdout.toString() === "Already up to date.") {
                 await i.update({ embeds: [already], components: [] })
                 client.reload()
             } else {
