@@ -1,1 +1,6 @@
-{"status":"test","prefix":"d!","log":"Change Global Prefix to d!"}
+{
+    "status": "test",
+    "prefix": "d!",
+    "log": "Change Global Prefix to d!",
+    "blacklist": []
+}
