@@ -47,7 +47,7 @@ module.exports = async(client, message) => {
     let commandFile = client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
 
     function runs(commands) {
-        client.commands.get(commands).run(client, message, args, prefix);
+        client.commands.get(commands).run(client, message, args);
         return client.commands.get(commands).help
     }
 
