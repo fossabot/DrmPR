@@ -55,7 +55,7 @@ module.exports = async(client, message) => {
     if (commandFile.conf.developer === true) {
         const youarenot = new Discord.MessageEmbed()
             .setFooter("DotBot")
-            .setColor("YELLOW")
+            .setColor("RED")
             .setDescription("You are not my **Developer**!")
             .setTimestamp()
         if (!client.config.bot.owner.includes(message.author.id)) return message.channel.send({ embeds: [youarenot] });
