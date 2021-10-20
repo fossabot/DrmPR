@@ -5,13 +5,13 @@ const invite = new MessageActionRow()
     .addComponents(
         new MessageButton()
         .setLabel('YES')
-        .setCustomId('yes')
+        .setCustomId('offyes')
         .setStyle('DANGER')
     )
     .addComponents(
         new MessageButton()
         .setLabel('NO')
-        .setCustomId('no')
+        .setCustomId('offno')
         .setStyle('SUCCESS')
     )
 const standar = new Discord.MessageEmbed()
@@ -30,7 +30,7 @@ exports.run = async(client, message, args) => {
     const filter = i => i.user.id === client.config.bot.owner;
     const collector = message.channel.createMessageComponentCollector({ filter, max: 1 });
     collector.on('collect', async i => {
-        if (i.customId === 'yes') {
+        if (i.customId === 'offyes') {
             let stdouts = execSync('git remote set-url origin https://github.com/DemuraAIdev/DrmPR.git && git pull')
             let stdout = stdouts.toString()
             const update = new Discord.MessageEmbed()
@@ -46,7 +46,7 @@ exports.run = async(client, message, args) => {
             }
 
         }
-        if (i.customId === 'no') {
+        if (i.customId === 'offno') {
             await i.update({ content: "canceled", embeds: [], components: [] })
         }
     });

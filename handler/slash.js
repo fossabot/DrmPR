@@ -8,6 +8,12 @@ module.exports = async(client, message) => {
     client.on('interactionCreate', async interaction => {
         if (!interaction.isCommand()) return;
         let commandFile = client.commands.get(interaction.commandName)
+        let black = require("../database/global.json")
+        let blacklist = black.blacklist
+
+        if (blacklist.includes(interaction.user.id)) {
+            return interaction.reply({ content: "You in blacklist bot if there is a problem contact me <@754192220843802664>" })
+        }
         if (commandFile.conf.developer === true) {
             if (!client.config.bot.owner.includes(interaction.user.id)) return interaction.reply('You are not my **Developer**!');
         }

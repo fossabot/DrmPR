@@ -18,13 +18,13 @@ const invite = new MessageActionRow()
     .addComponents(
         new MessageButton()
         .setLabel('YES')
-        .setCustomId('yes')
+        .setCustomId('offyes')
         .setStyle('DANGER')
     )
     .addComponents(
         new MessageButton()
         .setLabel('NO')
-        .setCustomId('no')
+        .setCustomId('offno')
         .setStyle('SUCCESS')
     )
 
@@ -40,11 +40,11 @@ exports.run = async(client, message, args) => {
     const collector = message.channel.createMessageComponentCollector({ filter, max: 1 });
 
     collector.on('collect', async i => {
-        if (i.customId === 'yes') {
+        if (i.customId === 'offyes') {
             await i.update({ content: "Bye", embeds: [embed], components: [] })
             process.exit(0)
         }
-        if (i.customId === 'no') {
+        if (i.customId === 'offno') {
             await i.update({ content: "canceled", embeds: [], components: [] })
         }
     });

@@ -11,13 +11,13 @@ const com = new MessageActionRow()
     .addComponents(
         new MessageButton()
         .setLabel('YES')
-        .setCustomId('yes')
+        .setCustomId('banyes')
         .setStyle('DANGER')
     )
     .addComponents(
         new MessageButton()
         .setLabel('NO')
-        .setCustomId('no')
+        .setCustomId('banno')
         .setStyle('SUCCESS')
     )
 
@@ -47,7 +47,7 @@ exports.run = async(client, message, args) => {
             const filter = i => i.user.id === message.author.id;
             const collector = message.channel.createMessageComponentCollector({ filter, max: 1 });
             collector.on('collect', async i => {
-                if (i.customId === 'yes') {
+                if (i.customId === 'banyes') {
                     member
                         .ban({
                             reason: reason,
@@ -61,7 +61,7 @@ exports.run = async(client, message, args) => {
                             i.reply('I was unable to ban the member');
                         });
                 }
-                if (i.customId === 'no') {
+                if (i.customId === 'banno') {
                     await i.update({ content: "canceled", embeds: [], components: [] })
                 }
             })
@@ -102,7 +102,7 @@ exports.slash = {
             .setColor('GREEN')
             .setDescription(`You get banned in server **${interaction.guild.name}** because \`${reason}\` `)
         collector.on('collect', async i => {
-            if (i.customId === 'yes') {
+            if (i.customId === 'banyes') {
                 member
                     .ban({
                         reason: reason,
@@ -116,7 +116,7 @@ exports.slash = {
                         i.reply('I was unable to ban the member');
                     });
             }
-            if (i.customId === 'no') {
+            if (i.customId === 'banno') {
                 await i.update({ content: "canceled", embeds: [], components: [] })
             }
         })

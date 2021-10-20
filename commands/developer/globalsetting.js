@@ -28,13 +28,13 @@ exports.run = async(client, message, args) => {
         .addComponents(
             new MessageButton()
             .setLabel('YES')
-            .setCustomId('yes')
+            .setCustomId('gsetyes')
             .setStyle('DANGER')
         )
         .addComponents(
             new MessageButton()
             .setLabel('NO')
-            .setCustomId('no')
+            .setCustomId('gsetno')
             .setStyle('SUCCESS')
         )
     let list = new Discord.MessageEmbed()
@@ -76,11 +76,11 @@ exports.run = async(client, message, args) => {
         const filter = i => i.user.id === client.config.bot.owner;
         const collector = message.channel.createMessageComponentCollector({ filter, max: 1 });
         collector.on('collect', async i => {
-            if (i.customId === 'yes') {
+            if (i.customId === 'gsetyes') {
                 let mss = await i.update({ content: `Mematikan command ` + args.slice(1).join(" ") + "...", components: [] })
                 client.commands.delete(args.slice(1).join(" "))
             }
-            if (i.customId === 'no') {
+            if (i.customId === 'gsetno') {
                 await i.update({ content: "canceled", embeds: [], components: [] })
             }
         });
@@ -121,13 +121,13 @@ exports.slash = {
                 const filter = i => i.user.id === client.config.bot.owner;
                 const collector = interaction.channel.createMessageComponentCollector({ filter, max: 1 });
                 collector.on('collect', async i => {
-                    if (i.customId === 'yes') {
+                    if (i.customId === 'gsetyes') {
                         await i.deferReply();
                         await wait(4000);
                         await i.editReply({ content: `Mematikan command ` + nac + "...", components: [] })
                         client.commands.delete(nac)
                     }
-                    if (i.customId === 'no') {
+                    if (i.customId === 'gsetno') {
                         await i.update({ content: "canceled", embeds: [], components: [] })
                     }
                 });
