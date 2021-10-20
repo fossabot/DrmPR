@@ -31,6 +31,8 @@ exports.run = async(client, message, args) => {
         const user = client.users.cache.size.toLocaleString()
         const channel = client.channels.cache.size.toLocaleString()
         const usage = formatBytes(process.memoryUsage().heapUsed)
+        const total = formatBytes(os.totalmem())
+        const free = formatBytes(os.freemem())
         const Node = process.version
         const CPU = percent.toFixed(2)
         const djs = client.package.dependencies["discord.js"];
@@ -62,7 +64,7 @@ exports.run = async(client, message, args) => {
                 .addField('Uptime', `${parseDur(client.uptime)}`, true)
                 .addFields({ name: '**Ping**', value: `**Latency** ${mss.createdTimestamp - message.createdTimestamp}ms\n**API** ${Math.floor(client.ws.ping)}ms`, inline: true }, { name: '**Software**', value: `**Discord.js** ${djs}\n**Nodejs** ${Node}`, inline: true }, )
                 .addField('Server', `**Guild** ${guild}\n**User** ${user}\n **Channel** ${channel}`, true)
-                .addField('System', `**CPU** ${cores} - ${cpuModel}\n**Used** ${CPU}%\n**RAM** ${usage}`, true)
+                .addField('System', `**CPU** ${cores} - ${cpuModel}\n**Used** ${CPU}%\n**RAM Usage** ${usage}\n**RAM** ${free} - ${total}`, true)
                 .setTimestamp()
                 .setFooter("Powered By DRM", message.author.displayAvatarURL());
             author = message.author.id
