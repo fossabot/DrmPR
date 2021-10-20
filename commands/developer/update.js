@@ -31,13 +31,14 @@ exports.run = async(client, message, args) => {
     const collector = message.channel.createMessageComponentCollector({ filter, max: 1 });
     collector.on('collect', async i => {
         if (i.customId === 'yes') {
-            let stdout = execSync('git remote set-url origin https://github.com/DemuraAIdev/DrmPR.git && git pull')
+            let stdouts = execSync('git remote set-url origin https://github.com/DemuraAIdev/DrmPR.git && git pull')
+            let stdout = stdouts.toString()
             const update = new Discord.MessageEmbed()
                 .setFooter("DotBot")
                 .setColor("GREEN")
-                .setDescription("Update complete\n```" + stdout.toString() + "```")
+                .setDescription("Update complete\n```" + stdout + "```")
                 .setTimestamp()
-            if (stdout.toString() === "Already up to date.") {
+            if (stdout === "Already up to date.") {
                 await i.update({ embeds: [already], components: [] })
                 client.reload()
             } else {
