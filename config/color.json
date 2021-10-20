@@ -1,0 +1,6 @@
+{
+    "error": "RED",
+    "success": "GREEN",
+    "warning": "YELLOW",
+    "default": "RANDOM"
+}

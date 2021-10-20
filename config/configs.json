@@ -1,0 +1,11 @@
+{
+    "version": "ALPHA-0.3.1",
+    "kernel": "INTI-Hirano-02",
+    "kernel-version": "v2.9",
+    "bot": {
+        "name": "DotBot",
+        "owner": "754192220843802664",
+        "owner-name": "DemuraAI",
+        "prefix": "d!"
+    }
+}
